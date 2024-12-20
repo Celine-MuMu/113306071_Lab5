@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+	<style>
+        table {
+            border-collapse: collapse; /* 使表格邊框合併為一層 */
+            width: 60%; /* 設定表格寬度 */
+        }
+
+        th, td {
+            border: 1px solid black; /* 設置表格邊框 */
+            text-align: center;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2; /* 設置標題欄背景顏色 */
+        }
+    </style>
+</head>
+
+<body>
+	<input type="text" id ="math" placeholder="Math">
+	<input type="text" id="eng" placeholder="English">
+	<button type="button" id="button" >Submit</button>
+	<table>
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Math</th>
+				<th>English</th>
+				<th>Average</th>
+			</tr>
+		</thead>
+		<tbody id="content"> </tbody>
+
+	<script >
+		var mArray = new Array();
+		var eArray = new Array();
+		var i = 0;
+		var avg;
+
+		function start(){
+			var buttonClick= document.getElementById("button");
+			buttonClick.addEventListener("click", addThing, false);
+		}
+
+		function addThing(){
+			var avg;
+			var math = document.getElementById("math");
+			var eng = document.getElementById("eng");
+			mArray.push(math.value);
+			eArray.push(eng.value);
+			var m= parseFloat(math.value);
+			var e = parseFloat(eng.value);
+			avg = (m + e)/2;
+			i++;
+			show(avg);
+		}
+
+		function show(avg){
+			var con = document.getElementById("content");
+			con.innerHTML += `
+                <tr>
+                    <td>${i}</td>
+                    <td>${mArray[i - 1]}</td>
+                    <td>${eArray[i - 1]}</td>
+                    <td>${avg}</td>
+                </tr>
+            `;
+		}
+		
+		start();
+	</script>
+</body>
+</html>
